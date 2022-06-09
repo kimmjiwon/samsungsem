@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="samsung.css">
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <div class="header-wrap">
+                <div class="logo">삼성전기</div>
+                <ul class="nav">
+                    <li><a href="#">기업정보</a></li>
+                    <li><a href="#">인재채용</a></li>
+                    <li><a href="#">뉴스룸</a></li>
+                    <li><a href="#">제품정보</a></li>
+                    <li><a href="#">고객지원</a></li>
+                </ul>
+                <ul class="util">
+                    <li><a href="#"><img src="img/ico_inq.png" alt="이메일 아이콘"></a></li>
+                    <li><a href="#">SNS</a></li>
+                    <li><a href="#">KOR</a></li>
+                    <button id="btn-search"><img src="img/srch_pop_close.png" alt=""></button>
+                </ul>
+            </div>
+            <div class="search-modal">
+                <div class="search-area">
+                    <input type="text" placeholder="검색어를 입력해주세요.">
+                    <button>icon</button>
+                </div>
+                <ul class="search-list">
+                    <li><a href="#">Product Search</a></li>
+                    <li><a href="#">Component Library</a></li>
+                    <li><a href="#">방문신청</a></li>
+                    <li><a href="#">사업장 소개</a></li>
+                </ul>
+            </div>
+        </header>
+        <main>
+            <div class="main-wrap">
+                <div class="main-img">
+                    <div class="imgSlider">
+                        <div class="img img1">
+                            <img src="img/main_video_thum1.jpg" alt="">
+                            <p>5G 시대를 맞이하여 더 앞선 기술로
+                                <br>더 나은 세상을 열어 갑니다.</p>
+                        </div>
+                        <div class="img img2">
+                            <img src="img/main_video_thum2.jpg" alt="">
+                            <p>
+                                Planet·People·Profit을 최우선으로 삼아
+                                <br>사회와의 조화로운 성장을 추구하겠습니다.
+                            </p>
+                        </div>
+                        <div class="img img3">
+                            <img src="img/main_video_thum3.jpg"alt="">
+                            <p>
+                                모두에게 가치있는 경험을 제공하고,
+                                <br>누구나 함께 일하고 싶어하는 최고의 기업으로 성장하겠습니다.
+                            </p>
+                        </div>
+                    </div>
+                    <button id="leftBtn">
+                        왼쪽 버튼
+                    </button>
+                    <button id="rightBtn">
+                        오른쪽 버튼
+                    </button>
+                    <div class="img-btn-list">
+                        <button class="img-btn img-btn1" data-index='0'></button>
+                        <button class="img-btn img-btn2" data-index='1'></button>
+                        <button class="img-btn img-btn3" data-index='2'></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const btn = document.querySelector('#btn-search');
+        const modal = document.querySelector('.search-modal');
+        const mainBtn = document.querySelectorAll('.imgSlider button')
+        const nextBtn = document.querySelector('#rightBtn')
+        const prevBtn = document.querySelector('#leftBtn')
+        const imgSlider = document.querySelector('.imgSlider')
+        const smallBtn = document.querySelectorAll('.img-btn-list button')
+
+        btn.addEventListener('click',(e)=>{
+            modal.classList.toggle('on');
+            let select = e.target;
+            select.classList.toggle('off')
+        })
+        
+        smallBtn.forEach(ele=>{
+            ele.addEventListener('click', btn=>{
+                let select = btn.target;
+                let index = select.dataset.index
+                imgSlider.style.left = index*-1425+'px';
+                selectedBtn(select)
+                current=index
+            })
+        })
+
+        function selectedBtn(select){
+            smallBtn.forEach(ele=>{
+                ele.classList.remove('on')
+            })
+            select.classList.add('on')
+        }
+
+        /* let event = new Event('click')
+        let current=0;
+        prevBtn.addEventListener('click',()=>{
+            current--;
+            if(current<0)current=2;
+            smallBtn[current].dispatchEvent(event);
+        })
+
+        nextBtn.addEventListener('click',()=>{
+            current++;
+            if(current>2)current=0;
+            smallBtn[current].dispatchEvent(event);
+        }) 
+ */
+        let event = new Event('click')
+        let current = 0;
+        
+        prevBtn.addEventListener('click',function(){
+            current--;
+            if(current<0)current=2;
+            smallBtn[current].dispatchEvent(event);
+        })
+        nextBtn.addEventListener('click',function(){
+            current++;
+            if(current>2)current=0;
+            smallBtn[current].dispatchEvent(event);
+        }) 
+    </script>
+</body>
+</html>
